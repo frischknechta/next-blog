@@ -25,7 +25,7 @@ const ArticlesPage = async () => {
   console.log("DATA>>>>>>>>>>>", data);
 
   return (
-    <div className="container mx-auto flex flex-col items-center gap-5">
+    <div className="container mx-auto flex flex-col items-center gap-5 pb-10">
       <h1 className="my-5 text-4xl font-bold">Articles</h1>
       <div className="mx-auto flex w-2/3 flex-col gap-5">
         {data?.map((article) => {

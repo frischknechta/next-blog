@@ -2,8 +2,11 @@ import { NewArticleForm } from "@/components/NewArticleForm";
 import Article from "@/models/Article";
 import connectPageToDb from "@/utils/connectPageToDb";
 import { redirect } from "next/navigation";
+import { auth } from "@/../auth";
 
-const NewArticlePage = () => {
+const NewArticlePage = async () => {
+  const session = await auth();
+
   const handleSubmit = async (title: string, text: string, author: string) => {
     "use server";
     try {
@@ -25,7 +28,9 @@ const NewArticlePage = () => {
     redirect("/articles");
   };
 
-  return (
+  return !session ? (
+    redirect("/")
+  ) : (
     <div className="flex w-screen flex-col items-center gap-5">
       <h1 className="my-5 text-4xl font-bold">New Article</h1>
       <div className="w-1/3">
