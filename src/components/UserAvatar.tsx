@@ -15,6 +15,7 @@ export default async function UserAvatar() {
             alt="User Avatar"
             width={50}
             height={50}
+            className="h-full rounded-full"
           />
         ) : null}
       </div>

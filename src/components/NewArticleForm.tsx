@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 export const NewArticleForm = ({
@@ -7,9 +8,13 @@ export const NewArticleForm = ({
 }: {
   handleSubmit: (title: string, text: string, author: string) => void;
 }) => {
+  const session = useSession();
+
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-  const [author, setAuthor] = useState("");
+  const [author, setAuthor] = useState(
+    session.data?.user?.name ? session.data.user.name : "",
+  );
 
   return (
     <form

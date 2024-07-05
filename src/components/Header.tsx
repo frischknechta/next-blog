@@ -9,7 +9,7 @@ export const Header = async () => {
   const session = await auth();
 
   return (
-    <header className="h-12 bg-black text-white">
+    <header className="h-16 w-screen bg-black text-white">
       <div className="container mx-auto flex h-full items-center justify-between">
         <Link href={"/"}>
           <h2 className="text-2xl font-bold">My Blog</h2>
@@ -30,9 +30,12 @@ export const Header = async () => {
             </Link>
           ) : null}
           {!session ? (
-            <div className="flex items-center gap-5">
-              <SignIn /> <SignInGoogle />
-            </div>
+            <Link
+              href={"/login"}
+              className="font-bold underline-offset-4 hover:underline"
+            >
+              Sign Up
+            </Link>
           ) : (
             <SignOut />
           )}

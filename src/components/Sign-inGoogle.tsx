@@ -1,19 +1,14 @@
-import { signIn } from "@/../auth";
+"use client";
+
+import { signIn } from "next-auth/react";
 
 export function SignInGoogle() {
   return (
-    <form
-      action={async () => {
-        "use server";
-        await signIn("google");
-      }}
+    <button
+      onClick={() => signIn("google", { callbackUrl: "/" })}
+      className="rounded-md bg-blue-500 p-2 text-white"
     >
-      <button
-        type="submit"
-        className="font-bold underline-offset-4 hover:underline"
-      >
-        Signin with Google
-      </button>
-    </form>
+      Sign In with Google
+    </button>
   );
 }
