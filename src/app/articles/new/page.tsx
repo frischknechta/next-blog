@@ -3,29 +3,41 @@ import Article from "@/models/Article";
 import connectPageToDb from "@/utils/connectPageToDb";
 import { redirect } from "next/navigation";
 import { auth } from "@/../auth";
+import axios from "axios";
 
 const NewArticlePage = async () => {
   const session = await auth();
 
-  const handleSubmit = async (title: string, text: string, author: string) => {
+  const handleSubmit = async (formData: FormData) => {
     "use server";
+
     try {
-      await connectPageToDb();
-      const date = new Date();
-      const newArticle = new Article({
-        title: title,
-        text: text,
-        author: author,
-        date: date,
-      });
-      console.log(newArticle);
-      await newArticle.save();
+      const response = await axios.post(
+        "http://localhost:3000/api/articles",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
+
+      // await connectPageToDb();
+      // const date = new Date();
+      // const newArticle = new Article({
+      //   title: title,
+      //   text: text,
+      //   author: author,
+      //   date: date,
+      // });
+      // console.log(newArticle);
+      // await newArticle.save();
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.log(error.message);
       }
     }
-    redirect("/articles");
+    // redirect("/articles");
   };
 
   return !session ? (

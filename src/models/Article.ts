@@ -5,6 +5,7 @@ const article = new Schema({
   text: String,
   author: String,
   date: Date,
+  picture: Object,
 });
 
 const Article = models.Article || model("Article", article);

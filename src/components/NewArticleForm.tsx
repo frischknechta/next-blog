@@ -6,12 +6,13 @@ import { useState } from "react";
 export const NewArticleForm = ({
   handleSubmit,
 }: {
-  handleSubmit: (title: string, text: string, author: string) => void;
+  handleSubmit: (formData: FormData) => void;
 }) => {
   const session = useSession();
 
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const [file, setFile] = useState<File>();
   const [author, setAuthor] = useState(
     session.data?.user?.name ? session.data.user.name : "",
   );
@@ -20,7 +21,15 @@ export const NewArticleForm = ({
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        handleSubmit(title, text, author);
+
+        if (title && text && author && file) {
+          const formData = new FormData();
+          formData.append("picture", file);
+          formData.append("title", title);
+          formData.append("text", text);
+          formData.append("author", author);
+          handleSubmit(formData);
+        }
       }}
       className="flex flex-col gap-5"
     >
@@ -48,6 +57,19 @@ export const NewArticleForm = ({
           setText(event.target.value);
         }}
         rows={10}
+        required
+      />
+      <label htmlFor="picture">Picture</label>
+      <input
+        className="flex border-2 border-black px-2"
+        type="file"
+        name="picture"
+        id="picture"
+        onChange={(event) => {
+          if (event.target.files) {
+            setFile(event.target.files[0]);
+          }
+        }}
         required
       />
       <label htmlFor="author">Author</label>
