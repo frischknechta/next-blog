@@ -10,7 +10,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const convertToBase64 = (file, buffer) => {
+const convertToBase64 = (file: File, buffer: Buffer) => {
   return `data:${file.type};base64,${buffer.toString("base64")}`;
 };
 
@@ -18,24 +18,9 @@ export const GET = () => {
   return NextResponse.json({ message: "HELLO!" });
 };
 
-// export const POST = connectRouteToDb(async (request: NextRequest) => {
-//   const { text, title, author } = await request.json();
-//   const newArticle = await Article.create({ title, text, author });
-//   return NextResponse.json(newArticle, { status: 201 });
-// });
-
 export const POST = connectRouteToDb(async (req: NextRequest) => {
   try {
     const formData = await req.formData();
-
-    const file = formData.get("picture");
-    const buffer = Buffer.from(await file.arrayBuffer());
-
-    const pictureToUpload = convertToBase64(file, buffer);
-
-    const result = await cloudinary.uploader.upload(pictureToUpload);
-
-    console.log(result);
 
     const date = new Date();
     const newArticle = new Article({
@@ -43,8 +28,19 @@ export const POST = connectRouteToDb(async (req: NextRequest) => {
       text: formData.get("text"),
       author: formData.get("author"),
       date: date,
-      picture: result,
     });
+
+    const file: any = formData.get("picture");
+
+    const buffer = Buffer.from(await file.arrayBuffer());
+
+    const pictureToUpload = convertToBase64(file, buffer);
+
+    const result = await cloudinary.uploader.upload(pictureToUpload, {
+      folder: `blog/${newArticle._id}`,
+    });
+
+    newArticle.picture = result;
 
     await newArticle.save();
 
@@ -52,6 +48,10 @@ export const POST = connectRouteToDb(async (req: NextRequest) => {
 
     return NextResponse.json({ message: "Success" });
   } catch (error) {
-    return NextResponse.json({ message: error.message });
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message });
+    } else {
+      return NextResponse.json({ message: "Unknown error" });
+    }
   }
 });

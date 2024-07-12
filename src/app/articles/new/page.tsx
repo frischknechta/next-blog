@@ -1,6 +1,4 @@
 import { NewArticleForm } from "@/components/NewArticleForm";
-import Article from "@/models/Article";
-import connectPageToDb from "@/utils/connectPageToDb";
 import { redirect } from "next/navigation";
 import { auth } from "@/../auth";
 import axios from "axios";
@@ -21,23 +19,14 @@ const NewArticlePage = async () => {
           },
         },
       );
-
-      // await connectPageToDb();
-      // const date = new Date();
-      // const newArticle = new Article({
-      //   title: title,
-      //   text: text,
-      //   author: author,
-      //   date: date,
-      // });
-      // console.log(newArticle);
-      // await newArticle.save();
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.log(error.message);
+      } else {
+        console.log({ message: "Unknown error" });
       }
     }
-    // redirect("/articles");
+    redirect("/articles");
   };
 
   return !session ? (
