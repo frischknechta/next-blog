@@ -11,7 +11,7 @@ const NewArticlePage = async () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/articles",
+        `${process.env.BACKEND_URI}api/articles`,
         formData,
         {
           headers: {
