@@ -16,6 +16,7 @@ export const NewArticleForm = ({
   const [author, setAuthor] = useState(
     session.data?.user?.name ? session.data.user.name : "",
   );
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <form
@@ -23,6 +24,7 @@ export const NewArticleForm = ({
         event.preventDefault();
 
         if (title && text && author && file) {
+          setIsLoading(true);
           const formData = new FormData();
           formData.append("picture", file);
           formData.append("title", title);
@@ -85,7 +87,10 @@ export const NewArticleForm = ({
         }}
         required
       />
-      <button className="w-fit self-center rounded-xl bg-blue-500 px-5 py-3 font-bold text-white hover:bg-opacity-90">
+      <button
+        disabled={isLoading ? true : false}
+        className="w-fit self-center rounded-xl bg-blue-500 px-5 py-3 font-bold text-white hover:bg-opacity-90"
+      >
         Submit
       </button>
     </form>

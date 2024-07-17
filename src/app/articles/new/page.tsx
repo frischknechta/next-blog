@@ -1,7 +1,17 @@
 import { NewArticleForm } from "@/components/NewArticleForm";
 import { redirect } from "next/navigation";
 import { auth } from "@/../auth";
-import axios from "axios";
+
+import Article from "@/models/Article";
+import connectPageToDb from "@/utils/connectPageToDb";
+import { convertToBase64 } from "@/utils/convertToBase64";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const NewArticlePage = async () => {
   const session = await auth();
@@ -10,22 +20,41 @@ const NewArticlePage = async () => {
     "use server";
 
     try {
-      const response = await axios.post(
-        `${process.env.URL}/api/articles`,
-        formData,
+      await connectPageToDb();
+
+      const date = new Date();
+      const newArticle = new Article({
+        title: formData.get("title"),
+        text: formData.get("text"),
+        author: formData.get("author"),
+        date: date,
+      });
+
+      const pictureToUpload: any = formData.get("picture");
+      const buffer = Buffer.from(await pictureToUpload.arrayBuffer());
+
+      console.log(pictureToUpload, buffer);
+
+      const result = await cloudinary.uploader.upload(
+        convertToBase64(pictureToUpload, buffer),
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          folder: `blog/${newArticle._id}`,
         },
       );
-    } catch (error: unknown) {
+
+      newArticle.picture = result;
+
+      await newArticle.save();
+
+      console.log("NEW ARTICLE>>>>>>>>><", newArticle);
+    } catch (error) {
       if (error instanceof Error) {
-        console.log(error.message);
+        return console.log({ message: error.message });
       } else {
-        console.log({ message: "Unknown error" });
+        return console.log({ message: "Unknown error" });
       }
     }
+
     redirect("/articles");
   };
 

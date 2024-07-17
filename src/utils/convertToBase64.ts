@@ -1,3 +1,3 @@
-export const convertToBase64 = (file: any) => {
-  return `data:${file.mimetype};base64,${file.data.toString("base64")}`;
+export const convertToBase64 = (file: File, buffer: Buffer) => {
+  return `data:${file.type};base64,${buffer.toString("base64")}`;
 };
