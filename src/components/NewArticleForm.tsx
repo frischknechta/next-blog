@@ -33,11 +33,11 @@ export const NewArticleForm = ({
           handleSubmit(formData);
         }
       }}
-      className="flex flex-col gap-5"
+      className="w-lg flex flex-col gap-5 font-sans"
     >
       <label htmlFor="title">Title</label>
       <input
-        className="flex border-2 border-black px-2"
+        className="rounded-md border-2 border-slate-300 p-2"
         type="text"
         name="title"
         id="title"
@@ -50,7 +50,7 @@ export const NewArticleForm = ({
       />
       <label htmlFor="text">Text</label>
       <textarea
-        className="flex border-2 border-black px-2"
+        className="rounded-md border-2 border-slate-300 p-2"
         name="text"
         id="text"
         placeholder="The content of your post"
@@ -63,7 +63,7 @@ export const NewArticleForm = ({
       />
       <label htmlFor="picture">Picture</label>
       <input
-        className="flex border-2 border-black px-2"
+        className="rounded-md border-2 border-slate-300 p-2"
         type="file"
         name="picture"
         id="picture"
@@ -76,7 +76,7 @@ export const NewArticleForm = ({
       />
       <label htmlFor="author">Author</label>
       <input
-        className="flex border-2 border-black px-2"
+        className="rounded-md border-2 border-slate-300 p-2"
         type="text"
         name="author"
         id="author"

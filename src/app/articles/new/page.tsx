@@ -46,7 +46,7 @@ const NewArticlePage = async () => {
 
       await newArticle.save();
 
-      console.log("NEW ARTICLE>>>>>>>>><", newArticle);
+      console.log("NEW ARTICLE>>>>>>>>>", newArticle);
     } catch (error) {
       if (error instanceof Error) {
         return console.log({ message: error.message });
@@ -61,9 +61,9 @@ const NewArticlePage = async () => {
   return !session ? (
     redirect("/")
   ) : (
-    <div className="flex w-screen flex-col items-center gap-5">
-      <h1 className="my-5 text-4xl font-bold">New Article</h1>
-      <div className="w-1/3">
+    <div className="container mx-auto flex flex-col items-center gap-5">
+      <h1 className="my-5 text-6xl">New Article</h1>
+      <div className="w-4/5 max-w-2xl">
         <NewArticleForm handleSubmit={handleSubmit} />
       </div>
     </div>

@@ -7,10 +7,12 @@ export const Article = ({ article }: { article: ArticleType }) => {
   console.log(article);
 
   return (
-    <div className="flex grow flex-col gap-2 border-2 border-black">
-      <div className="container mx-auto flex h-[40vh] items-center justify-between p-5">
+    <div className="flex grow flex-col gap-2">
+      <div className="container mx-auto my-10 flex items-end justify-between p-5">
         <h2 className="text-[5vw]">{article.title}</h2>
-        <p className="text-[2vw]">{format(article.date, "dd/MM/yyyy")}</p>
+        <p className="font-sans text-[2vw] font-light">
+          {format(article.date, "dd/MM/yyyy")}
+        </p>
       </div>
       <Image
         src={article.picture.secure_url}

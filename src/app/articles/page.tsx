@@ -24,8 +24,8 @@ const ArticlesPage = async () => {
 
   return (
     <div className="container mx-auto flex grow flex-col items-center gap-5 pb-10">
-      <h1 className="my-5 text-4xl font-bold">Articles</h1>
-      <div className="mx-auto grid w-full grid-cols-3 gap-10">
+      <h1 className="my-5 text-6xl">Articles</h1>
+      <div className="mx-auto grid w-full grid-cols-1 gap-10 p-5 md:grid-cols-2 lg:grid-cols-3">
         {data?.map((article) => {
           return (
             <Link

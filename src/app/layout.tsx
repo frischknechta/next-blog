@@ -1,10 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Overpass, Sorts_Mill_Goudy, Cardo } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { SessionProvider } from "next-auth/react";
 
-const inter = Inter({ subsets: ["latin"] });
+const overpass = Overpass({ subsets: ["latin"], variable: "--font-overpass" });
+const sorts_mill_goudy = Sorts_Mill_Goudy({
+  weight: ["400"],
+  subsets: ["latin"],
+  variable: "--font-sorts_mill_goudy",
+});
+const cardo = Cardo({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-cardo",
+});
 
 export const metadata: Metadata = {
   title: "My Blog",
@@ -19,8 +29,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-dvh">
-      <body className="flex min-h-full flex-col">
+    <html
+      lang="en"
+      className={`h-dvh ${overpass.variable} ${sorts_mill_goudy.variable} ${cardo.variable}`}
+    >
+      <body className="font-cardo flex min-h-full flex-col">
         <SessionProvider>
           <Header />
           {children}

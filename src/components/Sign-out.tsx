@@ -10,7 +10,7 @@ export function SignOut() {
     >
       <button
         type="submit"
-        className="font-bold underline-offset-4 hover:underline"
+        className="text-lg uppercase underline-offset-4 hover:underline"
       >
         Sign Out
       </button>

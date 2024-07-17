@@ -1,29 +1,27 @@
 import Link from "next/link";
-import { SignIn } from "@/components/Sign-in";
 import UserAvatar from "./UserAvatar";
 import { auth } from "@/../auth";
 import { SignOut } from "./Sign-out";
-import { SignInGoogle } from "./Sign-inGoogle";
 
 export const Header = async () => {
   const session = await auth();
 
   return (
-    <header className="h-16 w-screen bg-black text-white">
-      <div className="container mx-auto flex h-full items-center justify-between">
+    <header className="max-h-fit w-screen text-black">
+      <div className="container mx-auto flex h-full flex-col items-center justify-between p-5 md:flex-row">
         <Link href={"/"}>
-          <h2 className="text-2xl font-bold">My Blog</h2>
+          <h2 className="font-sorts_mill_goudy text-5xl">My Blog</h2>
         </Link>
-        <nav className="flex items-center gap-5">
+        <nav className="flex items-center gap-5 font-sans text-lg uppercase">
           <Link
-            className="font-bold underline-offset-4 hover:underline"
+            className="my-2 underline-offset-4 hover:underline"
             href={"/articles"}
           >
-            All articles
+            Articles
           </Link>
           {session ? (
             <Link
-              className="font-bold underline-offset-4 hover:underline"
+              className="underline-offset-4 hover:underline"
               href={"/articles/new"}
             >
               Write a new article
@@ -32,7 +30,7 @@ export const Header = async () => {
           {!session ? (
             <Link
               href={"/login"}
-              className="font-bold underline-offset-4 hover:underline"
+              className="underline-offset-4 hover:underline"
             >
               Sign Up
             </Link>

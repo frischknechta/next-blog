@@ -12,16 +12,13 @@ export default async function Home() {
       ) : (
         <h1 className="my-32 text-center text-6xl">Welcome to my blog!</h1>
       )}
-      <div className="flex gap-5">
-        <Link
-          className="text-2xl font-bold underline-offset-4 hover:underline"
-          href={"/articles"}
-        >
+      <div className="flex flex-col items-center gap-10 font-sans text-2xl uppercase md:flex-row">
+        <Link className="underline-offset-4 hover:underline" href={"/articles"}>
           All articles
         </Link>
         {session ? (
           <Link
-            className="text-2xl font-bold underline-offset-4 hover:underline"
+            className="underline-offset-4 hover:underline"
             href={"/articles/new"}
           >
             Write a new article

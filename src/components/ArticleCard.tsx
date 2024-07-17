@@ -12,8 +12,10 @@ export const ArticleCard = ({ article }: { article: ArticleType }) => {
         height={250}
         className="h-4/6 w-full object-cover"
       />
-      <p className="tracking-widest">{format(article.date, "dd/MM/yyyy")}</p>
-      <h2 className="text-3xl font-bold uppercase">{article.title}</h2>
+      <p className="font-sans tracking-widest">
+        {format(article.date, "dd/MM/yyyy")}
+      </p>
+      <h2 className="text-3xl uppercase">{article.title}</h2>
     </div>
   );
 };

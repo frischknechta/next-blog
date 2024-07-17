@@ -14,6 +14,11 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
+    fontFamily: {
+      sans: ["var(--font-overpass)"],
+      sorts_mill_goudy: ["var(--font-sorts_mill_goudy)"],
+      cardo: ["var(--font-cardo)"],
+    },
   },
   plugins: [],
 };
