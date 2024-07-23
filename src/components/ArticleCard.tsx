@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export const ArticleCard = ({ article }: { article: ArticleType }) => {
   return (
-    <div className="flex h-[50vh] flex-col items-center gap-5 hover:cursor-pointer">
+    <div className="mb-5 flex h-[60vh] flex-col items-center gap-5 hover:cursor-pointer">
       <Image
         src={article.picture.secure_url}
         alt={`${article.title} picture`}
