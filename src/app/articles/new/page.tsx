@@ -61,9 +61,9 @@ const NewArticlePage = async () => {
   return !session ? (
     redirect("/")
   ) : (
-    <div className="container mx-auto flex flex-col items-center gap-5">
+    <div className="container mx-auto flex grow flex-col items-center gap-5">
       <h1 className="my-5 text-6xl">New Article</h1>
-      <div className="w-4/5 max-w-2xl">
+      <div className="mb-10 w-4/5 max-w-2xl">
         <NewArticleForm handleSubmit={handleSubmit} />
       </div>
     </div>

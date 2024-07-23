@@ -3,6 +3,7 @@ import { Overpass, Sorts_Mill_Goudy, Cardo } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { SessionProvider } from "next-auth/react";
+import { Footer } from "@/components/Footer";
 
 const overpass = Overpass({ subsets: ["latin"], variable: "--font-overpass" });
 const sorts_mill_goudy = Sorts_Mill_Goudy({
@@ -33,11 +34,12 @@ export default function RootLayout({
       lang="en"
       className={`h-dvh ${overpass.variable} ${sorts_mill_goudy.variable} ${cardo.variable}`}
     >
-      <body className="font-cardo flex min-h-full flex-col">
+      <body className="flex min-h-full flex-col font-cardo">
         <SessionProvider>
           <Header />
           {children}
           {auth}
+          <Footer />
         </SessionProvider>
       </body>
     </html>

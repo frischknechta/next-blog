@@ -7,21 +7,23 @@ export const Header = async () => {
   const session = await auth();
 
   return (
-    <header className="max-h-fit w-screen text-black">
+    <header className="max-h-fit w-screen bg-white text-black">
       <div className="container mx-auto flex h-full flex-col items-center justify-between p-5 md:flex-row">
         <Link href={"/"}>
-          <h2 className="font-sorts_mill_goudy text-5xl">My Blog</h2>
+          <h2 className="mb-2 font-sorts_mill_goudy text-5xl sm:mb-0">
+            My Blog
+          </h2>
         </Link>
-        <nav className="flex items-center gap-5 font-sans text-lg uppercase">
+        <nav className="flex flex-col items-center gap-5 font-sans text-lg uppercase sm:flex-row">
           <Link
-            className="my-2 underline-offset-4 hover:underline"
+            className="underline-offset-4 hover:underline sm:my-2"
             href={"/articles"}
           >
             Articles
           </Link>
           {session ? (
             <Link
-              className="underline-offset-4 hover:underline"
+              className="underline-offset-4 hover:underline sm:my-2"
               href={"/articles/new"}
             >
               Write a new article
@@ -30,14 +32,16 @@ export const Header = async () => {
           {!session ? (
             <Link
               href={"/login"}
-              className="underline-offset-4 hover:underline"
+              className="underline-offset-4 hover:underline sm:my-2"
             >
               Sign Up
             </Link>
           ) : (
-            <SignOut />
+            <div className="flex items-center gap-5">
+              <SignOut />
+              <UserAvatar />
+            </div>
           )}
-          <UserAvatar />
         </nav>
       </div>
     </header>
